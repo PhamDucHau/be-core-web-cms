@@ -1,0 +1,31 @@
+{
+  "category": "Uncategorized",
+  "description": "You are a senior backend engineer.\n\nGenerate a complete Product CRUD API for an e-commerce website.\n\nTech stack:\n- Framework: NestJS\n- Database: MongoDB\n- ODM: Mongoose\n- Integration: @nestjs/mongoose\n- Validation: class-validator\n- API style: RESTful\n- Auth: JWT (assume AuthGuard already exists)\n\nUse the following coding style:\n- Inject Mongoose models using:\n  import { InjectModel } from '@nestjs/mongoose';\n  import { Model, Types } from 'mongoose';\n\nRequirements:\n\n1. Product Schema (products collection)\nDefine a Mongoose schema using @Schema() and @Prop().\n\nFields:\n- _id (ObjectId)\n- sku (string, unique, required)\n- name (string, required)\n- slug (string, unique)\n- description (string)\n- shortDescription (string, optional)\n- price (number, required)\n- salePrice (number, optional)\n- currency (string, default: \"VND\")\n- stockQuantity (number, default: 0)\n- isInStock (boolean)\n- status (enum: DRAFT | ACTIVE | INACTIVE)\n- categoryId (ObjectId, ref Category)\n- brand (string, optional)\n- thumbnailUrl (string)\n- images (string[])\n- weight (number, optional)\n- dimensions (object: { length, width, height })\n- tags (string[])\n- ratingAverage (number, default 0)\n- ratingCount (number, default 0)\n- isDeleted (boolean, default false)\n- createdAt (Date)\n- updatedAt (Date)\n\nUse timestamps and soft delete logic.\n\n2. DTOs\nCreate:\n- CreateProductDto (with class-validator)\n- UpdateProductDto (PartialType)\n- QueryProductDto:\n  - search\n  - minPrice\n  - maxPrice\n  - categoryId\n  - status\n  - page\n  - limit\n  - sortBy (price | createdAt | name)\n  - sortOrder (asc | desc)\n\n3. API Endpoints\n- POST /products\n- GET /products\n- GET /products/:id\n- PUT /products/:id\n- DELETE /products/:id (soft delete)\n\n4. Business Rules\n- SKU must be unique\n- Auto-generate slug from name if not provided\n- salePrice < price\n- isInStock auto-calculated from stockQuantity\n- Soft delete only (isDeleted = true)\n- Validate ObjectId using Types.ObjectId.isValid()\n\n5. Service Layer\n- Use Mongoose queries and aggregation if needed\n- Use InjectModel(Product.name) with Model<Product>\n- Throw BadRequestException, NotFoundException correctly\n- Implement pagination, filtering, searching\n\n6. Controller\n- Use DTO validation\n- RESTful responses\n- Swagger decorators (@ApiTags, @ApiOperation, @ApiResponse)\n\n7. Output\nGenerate:\n- product.schema.ts\n- dto files\n- product.service.ts\n- product.controller.ts\n- Example request/response JSON\n\nGenerate clean, production-ready code with comments.",
+  "title": "create api product",
+  "images": [],
+  "imagePaths": [],
+  "textFilePaths": [],
+  "skipTests": true,
+  "model": "opus",
+  "thinkingLevel": "none",
+  "reasoningEffort": "none",
+  "branchName": "feature/feature/create-curd-api-product-1770706550960-x33p",
+  "priority": 2,
+  "planningMode": "skip",
+  "requirePlanApproval": false,
+  "dependencies": [],
+  "workMode": "auto",
+  "titleGenerating": false,
+  "status": "verified",
+  "id": "feature-1770706551028-i3zkng3dv",
+  "descriptionHistory": [
+    {
+      "description": "You are a senior backend engineer.\n\nGenerate a complete Product CRUD API for an e-commerce website.\n\nTech stack:\n- Framework: NestJS\n- Database: MongoDB\n- ODM: Mongoose\n- Integration: @nestjs/mongoose\n- Validation: class-validator\n- API style: RESTful\n- Auth: JWT (assume AuthGuard already exists)\n\nUse the following coding style:\n- Inject Mongoose models using:\n  import { InjectModel } from '@nestjs/mongoose';\n  import { Model, Types } from 'mongoose';\n\nRequirements:\n\n1. Product Schema (products collection)\nDefine a Mongoose schema using @Schema() and @Prop().\n\nFields:\n- _id (ObjectId)\n- sku (string, unique, required)\n- name (string, required)\n- slug (string, unique)\n- description (string)\n- shortDescription (string, optional)\n- price (number, required)\n- salePrice (number, optional)\n- currency (string, default: \"VND\")\n- stockQuantity (number, default: 0)\n- isInStock (boolean)\n- status (enum: DRAFT | ACTIVE | INACTIVE)\n- categoryId (ObjectId, ref Category)\n- brand (string, optional)\n- thumbnailUrl (string)\n- images (string[])\n- weight (number, optional)\n- dimensions (object: { length, width, height })\n- tags (string[])\n- ratingAverage (number, default 0)\n- ratingCount (number, default 0)\n- isDeleted (boolean, default false)\n- createdAt (Date)\n- updatedAt (Date)\n\nUse timestamps and soft delete logic.\n\n2. DTOs\nCreate:\n- CreateProductDto (with class-validator)\n- UpdateProductDto (PartialType)\n- QueryProductDto:\n  - search\n  - minPrice\n  - maxPrice\n  - categoryId\n  - status\n  - page\n  - limit\n  - sortBy (price | createdAt | name)\n  - sortOrder (asc | desc)\n\n3. API Endpoints\n- POST /products\n- GET /products\n- GET /products/:id\n- PUT /products/:id\n- DELETE /products/:id (soft delete)\n\n4. Business Rules\n- SKU must be unique\n- Auto-generate slug from name if not provided\n- salePrice < price\n- isInStock auto-calculated from stockQuantity\n- Soft delete only (isDeleted = true)\n- Validate ObjectId using Types.ObjectId.isValid()\n\n5. Service Layer\n- Use Mongoose queries and aggregation if needed\n- Use InjectModel(Product.name) with Model<Product>\n- Throw BadRequestException, NotFoundException correctly\n- Implement pagination, filtering, searching\n\n6. Controller\n- Use DTO validation\n- RESTful responses\n- Swagger decorators (@ApiTags, @ApiOperation, @ApiResponse)\n\n7. Output\nGenerate:\n- product.schema.ts\n- dto files\n- product.service.ts\n- product.controller.ts\n- Example request/response JSON\n\nGenerate clean, production-ready code with comments.",
+      "timestamp": "2026-02-10T06:55:51.145Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-02-10T06:55:55.203Z",
+  "updatedAt": "2026-02-10T07:05:16.226Z",
+  "justFinishedAt": "2026-02-10T07:05:16.226Z"
+}

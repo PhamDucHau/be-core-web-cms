@@ -1,0 +1,434 @@
+{
+  "info": {
+    "title": "Product API Examples",
+    "description": "Example request/response payloads for Product CRUD API",
+    "version": "1.0.0"
+  },
+  "endpoints": {
+    "createProduct": {
+      "endpoint": "POST /products",
+      "description": "Create a new product",
+      "request": {
+        "headers": {
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "sku": "HEADPHONE-001-BLK",
+          "name": "Premium Wireless Headphones",
+          "description": "Experience crystal-clear audio with our premium wireless headphones. Features noise cancellation, 30-hour battery life, and premium comfort.",
+          "shortDescription": "Premium wireless headphones with noise cancellation",
+          "price": 2990000,
+          "salePrice": 2490000,
+          "currency": "VND",
+          "stockQuantity": 100,
+          "status": "ACTIVE",
+          "categoryId": "507f1f77bcf86cd799439012",
+          "brand": "Sony",
+          "thumbnailUrl": "https://example.com/images/headphones-thumb.jpg",
+          "images": [
+            "https://example.com/images/headphones-1.jpg",
+            "https://example.com/images/headphones-2.jpg",
+            "https://example.com/images/headphones-3.jpg"
+          ],
+          "weight": 250,
+          "dimensions": {
+            "length": 20,
+            "width": 18,
+            "height": 8
+          },
+          "tags": ["electronics", "audio", "wireless", "noise-cancellation"]
+        }
+      },
+      "response": {
+        "status": 201,
+        "body": {
+          "message": "Product created successfully",
+          "data": {
+            "_id": "507f1f77bcf86cd799439011",
+            "sku": "HEADPHONE-001-BLK",
+            "name": "Premium Wireless Headphones",
+            "slug": "premium-wireless-headphones",
+            "description": "Experience crystal-clear audio with our premium wireless headphones. Features noise cancellation, 30-hour battery life, and premium comfort.",
+            "shortDescription": "Premium wireless headphones with noise cancellation",
+            "price": 2990000,
+            "salePrice": 2490000,
+            "currency": "VND",
+            "stockQuantity": 100,
+            "isInStock": true,
+            "status": "ACTIVE",
+            "categoryId": "507f1f77bcf86cd799439012",
+            "brand": "Sony",
+            "thumbnailUrl": "https://example.com/images/headphones-thumb.jpg",
+            "images": [
+              "https://example.com/images/headphones-1.jpg",
+              "https://example.com/images/headphones-2.jpg",
+              "https://example.com/images/headphones-3.jpg"
+            ],
+            "weight": 250,
+            "dimensions": {
+              "length": 20,
+              "width": 18,
+              "height": 8
+            },
+            "tags": ["electronics", "audio", "wireless", "noise-cancellation"],
+            "ratingAverage": 0,
+            "ratingCount": 0,
+            "isDeleted": false,
+            "createdAt": "2024-01-15T10:30:00.000Z",
+            "updatedAt": "2024-01-15T10:30:00.000Z"
+          }
+        }
+      },
+      "errorResponses": {
+        "400_validation": {
+          "status": 400,
+          "body": {
+            "statusCode": 400,
+            "message": ["price must be greater than or equal to 0", "sku should not be empty"],
+            "error": "Bad Request"
+          }
+        },
+        "400_salePrice": {
+          "status": 400,
+          "body": {
+            "statusCode": 400,
+            "message": "Sale price must be less than regular price",
+            "error": "Bad Request"
+          }
+        },
+        "409_duplicate": {
+          "status": 409,
+          "body": {
+            "statusCode": 409,
+            "message": "SKU \"HEADPHONE-001-BLK\" already exists",
+            "error": "Conflict"
+          }
+        },
+        "401_unauthorized": {
+          "status": 401,
+          "body": {
+            "statusCode": 401,
+            "message": "Invalid token",
+            "error": "Unauthorized"
+          }
+        }
+      }
+    },
+    "getAllProducts": {
+      "endpoint": "GET /products",
+      "description": "Get all products with filtering, pagination, and sorting",
+      "request": {
+        "headers": {
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        },
+        "queryParams": {
+          "search": "wireless headphones",
+          "minPrice": 1000000,
+          "maxPrice": 5000000,
+          "categoryId": "507f1f77bcf86cd799439012",
+          "status": "ACTIVE",
+          "brand": "Sony",
+          "isInStock": true,
+          "tags": "electronics,audio",
+          "page": "1",
+          "limit": 10,
+          "sortBy": "price",
+          "sortOrder": "asc"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "data": [
+            {
+              "_id": "507f1f77bcf86cd799439011",
+              "sku": "HEADPHONE-001-BLK",
+              "name": "Premium Wireless Headphones",
+              "slug": "premium-wireless-headphones",
+              "shortDescription": "Premium wireless headphones with noise cancellation",
+              "price": 2990000,
+              "salePrice": 2490000,
+              "currency": "VND",
+              "stockQuantity": 100,
+              "isInStock": true,
+              "status": "ACTIVE",
+              "categoryId": "507f1f77bcf86cd799439012",
+              "brand": "Sony",
+              "thumbnailUrl": "https://example.com/images/headphones-thumb.jpg",
+              "tags": ["electronics", "audio", "wireless"],
+              "ratingAverage": 4.5,
+              "ratingCount": 150,
+              "createdAt": "2024-01-15T10:30:00.000Z"
+            },
+            {
+              "_id": "507f1f77bcf86cd799439013",
+              "sku": "HEADPHONE-002-WHT",
+              "name": "Sport Wireless Earbuds",
+              "slug": "sport-wireless-earbuds",
+              "shortDescription": "Waterproof sport earbuds",
+              "price": 1490000,
+              "salePrice": 1290000,
+              "currency": "VND",
+              "stockQuantity": 250,
+              "isInStock": true,
+              "status": "ACTIVE",
+              "categoryId": "507f1f77bcf86cd799439012",
+              "brand": "Sony",
+              "thumbnailUrl": "https://example.com/images/earbuds-thumb.jpg",
+              "tags": ["electronics", "audio", "sport"],
+              "ratingAverage": 4.2,
+              "ratingCount": 89,
+              "createdAt": "2024-01-14T08:15:00.000Z"
+            }
+          ],
+          "pagination": {
+            "total": 45,
+            "page": 1,
+            "limit": 10,
+            "totalPages": 5,
+            "hasNextPage": true,
+            "hasPrevPage": false
+          }
+        }
+      },
+      "exampleUrls": [
+        "/products?page=1&limit=10",
+        "/products?search=headphones&status=ACTIVE",
+        "/products?minPrice=1000000&maxPrice=5000000&sortBy=price&sortOrder=asc",
+        "/products?categoryId=507f1f77bcf86cd799439012&isInStock=true",
+        "/products?page=all"
+      ]
+    },
+    "getProductById": {
+      "endpoint": "GET /products/:id",
+      "description": "Get a single product by ID",
+      "request": {
+        "headers": {
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        },
+        "params": {
+          "id": "507f1f77bcf86cd799439011"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "message": "Product retrieved successfully",
+          "data": {
+            "_id": "507f1f77bcf86cd799439011",
+            "sku": "HEADPHONE-001-BLK",
+            "name": "Premium Wireless Headphones",
+            "slug": "premium-wireless-headphones",
+            "description": "Experience crystal-clear audio with our premium wireless headphones. Features noise cancellation, 30-hour battery life, and premium comfort.",
+            "shortDescription": "Premium wireless headphones with noise cancellation",
+            "price": 2990000,
+            "salePrice": 2490000,
+            "currency": "VND",
+            "stockQuantity": 100,
+            "isInStock": true,
+            "status": "ACTIVE",
+            "categoryId": "507f1f77bcf86cd799439012",
+            "brand": "Sony",
+            "thumbnailUrl": "https://example.com/images/headphones-thumb.jpg",
+            "images": [
+              "https://example.com/images/headphones-1.jpg",
+              "https://example.com/images/headphones-2.jpg",
+              "https://example.com/images/headphones-3.jpg"
+            ],
+            "weight": 250,
+            "dimensions": {
+              "length": 20,
+              "width": 18,
+              "height": 8
+            },
+            "tags": ["electronics", "audio", "wireless", "noise-cancellation"],
+            "ratingAverage": 4.5,
+            "ratingCount": 150,
+            "isDeleted": false,
+            "createdAt": "2024-01-15T10:30:00.000Z",
+            "updatedAt": "2024-01-15T10:30:00.000Z"
+          }
+        }
+      },
+      "errorResponses": {
+        "400_invalidId": {
+          "status": 400,
+          "body": {
+            "statusCode": 400,
+            "message": "Invalid product ID format",
+            "error": "Bad Request"
+          }
+        },
+        "404_notFound": {
+          "status": 404,
+          "body": {
+            "statusCode": 404,
+            "message": "Product not found",
+            "error": "Not Found"
+          }
+        }
+      }
+    },
+    "updateProduct": {
+      "endpoint": "PUT /products/:id",
+      "description": "Update an existing product",
+      "request": {
+        "headers": {
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+          "Content-Type": "application/json"
+        },
+        "params": {
+          "id": "507f1f77bcf86cd799439011"
+        },
+        "body": {
+          "name": "Premium Wireless Headphones Pro",
+          "price": 3490000,
+          "salePrice": 2990000,
+          "stockQuantity": 75,
+          "status": "ACTIVE",
+          "tags": ["electronics", "audio", "wireless", "noise-cancellation", "premium"]
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "message": "Product updated successfully",
+          "data": {
+            "_id": "507f1f77bcf86cd799439011",
+            "sku": "HEADPHONE-001-BLK",
+            "name": "Premium Wireless Headphones Pro",
+            "slug": "premium-wireless-headphones-pro",
+            "description": "Experience crystal-clear audio with our premium wireless headphones. Features noise cancellation, 30-hour battery life, and premium comfort.",
+            "shortDescription": "Premium wireless headphones with noise cancellation",
+            "price": 3490000,
+            "salePrice": 2990000,
+            "currency": "VND",
+            "stockQuantity": 75,
+            "isInStock": true,
+            "status": "ACTIVE",
+            "categoryId": "507f1f77bcf86cd799439012",
+            "brand": "Sony",
+            "tags": ["electronics", "audio", "wireless", "noise-cancellation", "premium"],
+            "ratingAverage": 4.5,
+            "ratingCount": 150,
+            "isDeleted": false,
+            "createdAt": "2024-01-15T10:30:00.000Z",
+            "updatedAt": "2024-01-16T14:20:00.000Z"
+          }
+        }
+      }
+    },
+    "deleteProduct": {
+      "endpoint": "DELETE /products/:id",
+      "description": "Soft delete a product (sets isDeleted to true)",
+      "request": {
+        "headers": {
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        },
+        "params": {
+          "id": "507f1f77bcf86cd799439011"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "message": "Product deleted successfully",
+          "id": "507f1f77bcf86cd799439011"
+        }
+      }
+    },
+    "restoreProduct": {
+      "endpoint": "PATCH /products/:id/restore",
+      "description": "Restore a soft-deleted product",
+      "request": {
+        "headers": {
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        },
+        "params": {
+          "id": "507f1f77bcf86cd799439011"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "message": "Product restored successfully",
+          "data": {
+            "_id": "507f1f77bcf86cd799439011",
+            "name": "Premium Wireless Headphones",
+            "isDeleted": false
+          }
+        }
+      }
+    },
+    "updateStock": {
+      "endpoint": "PATCH /products/:id/stock",
+      "description": "Update product stock quantity",
+      "request": {
+        "headers": {
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+          "Content-Type": "application/json"
+        },
+        "params": {
+          "id": "507f1f77bcf86cd799439011"
+        },
+        "body": {
+          "quantity": 50
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "message": "Stock updated successfully",
+          "data": {
+            "_id": "507f1f77bcf86cd799439011",
+            "stockQuantity": 50,
+            "isInStock": true
+          }
+        }
+      }
+    },
+    "bulkUpdateStatus": {
+      "endpoint": "PATCH /products/bulk/status",
+      "description": "Update status for multiple products",
+      "request": {
+        "headers": {
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "ids": [
+            "507f1f77bcf86cd799439011",
+            "507f1f77bcf86cd799439012",
+            "507f1f77bcf86cd799439013"
+          ],
+          "status": "INACTIVE"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "message": "Products updated successfully",
+          "modifiedCount": 3
+        }
+      }
+    }
+  },
+  "schemas": {
+    "ProductStatus": {
+      "type": "enum",
+      "values": ["DRAFT", "ACTIVE", "INACTIVE"],
+      "description": "Product lifecycle status"
+    },
+    "SortByField": {
+      "type": "enum",
+      "values": ["price", "createdAt", "name", "ratingAverage", "stockQuantity"],
+      "description": "Available fields for sorting"
+    },
+    "SortOrder": {
+      "type": "enum",
+      "values": ["asc", "desc"],
+      "description": "Sort order direction"
+    }
+  }
+}
