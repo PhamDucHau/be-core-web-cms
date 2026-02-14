@@ -10,7 +10,7 @@ import { FriendModule } from './auth/socket/friend.module';
 import { MinioModule } from './minio/minio.module';
 import { UserModule } from './user/user.module';
 import { ProductModule } from './product/product.module';
-import { CategoryModule } from './modules/category/category.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
