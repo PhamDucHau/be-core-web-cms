@@ -1,0 +1,37 @@
+{
+  "category": "Uncategorized",
+  "description": "Cho category ra ngoài cùng cấp với folder product, không để trong folder module nhé",
+  "title": "Đưa foloder category ra ngoài cùng cấp với product",
+  "images": [],
+  "imagePaths": [
+    {
+      "id": "img-1771075618468-7ce4hv3d2",
+      "path": "/projects/be-core-web-cms/.automaker/features/feature-1771075670912-t8olajk5t/images/pasted-image-2026-02-14T13-26-58-393Z-1771075618550.png",
+      "filename": "pasted-image-2026-02-14T13-26-58-393Z.png",
+      "mimeType": "image/png"
+    }
+  ],
+  "textFilePaths": [],
+  "skipTests": true,
+  "model": "opus",
+  "thinkingLevel": "none",
+  "reasoningEffort": "none",
+  "priority": 2,
+  "planningMode": "skip",
+  "requirePlanApproval": false,
+  "dependencies": [],
+  "workMode": "current",
+  "titleGenerating": false,
+  "status": "verified",
+  "id": "feature-1771075670912-t8olajk5t",
+  "descriptionHistory": [
+    {
+      "description": "Cho category ra ngoài cùng cấp với folder product, không để trong folder module nhé",
+      "timestamp": "2026-02-14T13:27:51.084Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-02-14T13:28:02.704Z",
+  "updatedAt": "2026-02-14T13:31:47.839Z",
+  "justFinishedAt": "2026-02-14T13:31:47.839Z"
+}

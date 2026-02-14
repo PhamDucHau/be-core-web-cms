@@ -34,3 +34,22 @@ usageStats:
 - **Rejected:** Forcing bulk updates through individual endpoints - N requests instead of 1, worse performance, no feedback on how many succeeded
 - **Trade-offs:** Gained: efficiency for bulk operations, single database hit. Lost: per-item error reporting (one failure fails entire operation)
 - **Breaking if changed:** Removing bulk endpoint forces clients to make multiple requests, degrading performance for large updates
+
+### Controller method findProducts queries Product collection instead of exposing Products array on Category; uses populate instead of direct relationship (2026-02-14)
+- **Context:** Need to retrieve products within a category without embedding product array in category document
+- **Why:** Products are primary documents with their own lifecycle; avoids denormalization and keeping product array in sync; allows filtering products independently; reduces Category document size
+- **Rejected:** Storing products array on Category (maintenance nightmare when products change), storing category name on Product only (requires re-query to get full info), using Mongoose virtuals with refs (same effect as populate)
+- **Trade-offs:** Extra query operation; no single Category fetch gives all related data; can filter/paginate products independently after fetch
+- **Breaking if changed:** If Product schema removes categoryId ref, populate fails; if method removed, client must implement product fetching logic
+
+#### [Pattern] findBySlug, findChildren, findRootCategories utility methods in service; not all exposed as direct routes but available for composition (2026-02-14)
+- **Problem solved:** Categories have hierarchical relationships; some queries are needed internally or for future feature use
+- **Why this works:** Service layer provides rich query toolkit; not all need HTTP endpoints; enables reuse in different contexts; allows lazy implementation of routes
+- **Trade-offs:** Service logic reusable; API stays focused on essential operations; easier to add routes later; clients might implement same logic separately
+
+### API provides separate /categories/tree endpoint for hierarchical data vs flat /categories list endpoint (2026-02-14)
+- **Context:** Need to support both flat pagination for admin tables and hierarchical visualization for dropdowns/breadcrumbs
+- **Why:** Tree endpoint requires different response structure and aggregation logic. Flat endpoint with pagination is standard for data tables. Separating prevents JSON bloat - clients only fetch format needed
+- **Rejected:** Single endpoint with optional ?format=tree parameter - adds complexity to controller logic and response structure
+- **Trade-offs:** Gained: clean separation of concerns, optimized payloads. Lost: endpoint count doubles, client must know which to call
+- **Breaking if changed:** If tree endpoint removed, breadcrumb/navigation features would need to reconstruct tree from flat data or make multiple queries

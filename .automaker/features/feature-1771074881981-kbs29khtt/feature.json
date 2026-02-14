@@ -1,0 +1,32 @@
+{
+  "category": "Uncategorized",
+  "description": "You are a senior NestJS backend developer. Generate a complete Product Category module using NestJS and Mongoose.\n\nContext:\n- I already have a Product schema with a field:\n\n  @Prop({\n    type: Types.ObjectId,\n    ref: 'Category',\n    index: true\n  })\n  categoryId?: Types.ObjectId;\n\n- MongoDB with Mongoose is used.\n- NestJS architecture must follow best practices.\n- Use @nestjs/mongoose decorators.\n\nYour task:\nCreate a full Category module with proper relationship to Product.\n\nRequirements:\n\n1. Create Category schema (category.schema.ts)\n\nFields:\n- name: string (required, unique, indexed)\n- slug: string (unique, indexed)\n- description: string (optional)\n- parentId: ObjectId (ref Category, optional, for hierarchical categories)\n- isActive: boolean (default true)\n- isDeleted: boolean (default false)\n- createdAt, updatedAt (timestamps)\n\nAlso include:\n\n- virtual field \"id\"\n- indexes on:\n  - name\n  - slug\n  - parentId\n  - isDeleted\n\nCollection name: categories\n\n---\n\n2. Create DTOs\n\ncreate-category.dto.ts\nupdate-category.dto.ts\n\nFields:\n- name (required)\n- slug (optional)\n- description (optional)\n- parentId (optional)\n- isActive (optional)\n\nUse class-validator decorators.\n\n---\n\n3. Create Category Service\n\ncategory.service.ts\n\nMethods:\n\n- create(dto)\n- findAll()\n- findOne(id)\n- update(id, dto)\n- softDelete(id)\n\nAlso include:\n\nfindProducts(categoryId)\n\nThis should query Product model and return products in this category.\n\nInject Product model using:\n\n@InjectModel(Product.name)\n\n---\n\n4. Create Category Controller\n\ncategory.controller.ts\n\nRoutes:\n\nPOST /categories\nGET /categories\nGET /categories/:id\nPATCH /categories/:id\nDELETE /categories/:id\n\nGET /categories/:id/products\n\n---\n\n5. Create Category Module\n\ncategory.module.ts\n\nImport MongooseModule.forFeature for:\n\nCategory\nProduct\n\nExport CategoryService\n\n---\n\n6. Relationship behavior\n\nWhen querying categories, allow optional population of parent.\n\nWhen querying products, allow populate category.\n\nExample:\n\n.populate('categoryId', 'name slug')\n\n---\n\n7. Follow clean architecture:\n\n- folder: src/modules/category/\n- files:\n  - category.schema.ts\n  - category.service.ts\n  - category.controller.ts\n  - category.module.ts\n  - dto/create-category.dto.ts\n  - dto/update-category.dto.ts\n\n---\n\n8. Use soft delete pattern (isDeleted flag), never hard delete.\n\n---\n\n9. Use Types.ObjectId validation.\n\n---\n\n10. Use best practices for NestJS + Mongoose production backend.\n\nReturn full working code for all files.",
+  "title": "Build module product category",
+  "images": [],
+  "imagePaths": [],
+  "textFilePaths": [],
+  "skipTests": true,
+  "model": "opus",
+  "thinkingLevel": "none",
+  "reasoningEffort": "none",
+  "branchName": "feature/product-category",
+  "priority": 2,
+  "planningMode": "skip",
+  "requirePlanApproval": false,
+  "dependencies": [],
+  "workMode": "custom",
+  "titleGenerating": false,
+  "status": "verified",
+  "id": "feature-1771074881981-kbs29khtt",
+  "descriptionHistory": [
+    {
+      "description": "You are a senior NestJS backend developer. Generate a complete Product Category module using NestJS and Mongoose.\n\nContext:\n- I already have a Product schema with a field:\n\n  @Prop({\n    type: Types.ObjectId,\n    ref: 'Category',\n    index: true\n  })\n  categoryId?: Types.ObjectId;\n\n- MongoDB with Mongoose is used.\n- NestJS architecture must follow best practices.\n- Use @nestjs/mongoose decorators.\n\nYour task:\nCreate a full Category module with proper relationship to Product.\n\nRequirements:\n\n1. Create Category schema (category.schema.ts)\n\nFields:\n- name: string (required, unique, indexed)\n- slug: string (unique, indexed)\n- description: string (optional)\n- parentId: ObjectId (ref Category, optional, for hierarchical categories)\n- isActive: boolean (default true)\n- isDeleted: boolean (default false)\n- createdAt, updatedAt (timestamps)\n\nAlso include:\n\n- virtual field \"id\"\n- indexes on:\n  - name\n  - slug\n  - parentId\n  - isDeleted\n\nCollection name: categories\n\n---\n\n2. Create DTOs\n\ncreate-category.dto.ts\nupdate-category.dto.ts\n\nFields:\n- name (required)\n- slug (optional)\n- description (optional)\n- parentId (optional)\n- isActive (optional)\n\nUse class-validator decorators.\n\n---\n\n3. Create Category Service\n\ncategory.service.ts\n\nMethods:\n\n- create(dto)\n- findAll()\n- findOne(id)\n- update(id, dto)\n- softDelete(id)\n\nAlso include:\n\nfindProducts(categoryId)\n\nThis should query Product model and return products in this category.\n\nInject Product model using:\n\n@InjectModel(Product.name)\n\n---\n\n4. Create Category Controller\n\ncategory.controller.ts\n\nRoutes:\n\nPOST /categories\nGET /categories\nGET /categories/:id\nPATCH /categories/:id\nDELETE /categories/:id\n\nGET /categories/:id/products\n\n---\n\n5. Create Category Module\n\ncategory.module.ts\n\nImport MongooseModule.forFeature for:\n\nCategory\nProduct\n\nExport CategoryService\n\n---\n\n6. Relationship behavior\n\nWhen querying categories, allow optional population of parent.\n\nWhen querying products, allow populate category.\n\nExample:\n\n.populate('categoryId', 'name slug')\n\n---\n\n7. Follow clean architecture:\n\n- folder: src/modules/category/\n- files:\n  - category.schema.ts\n  - category.service.ts\n  - category.controller.ts\n  - category.module.ts\n  - dto/create-category.dto.ts\n  - dto/update-category.dto.ts\n\n---\n\n8. Use soft delete pattern (isDeleted flag), never hard delete.\n\n---\n\n9. Use Types.ObjectId validation.\n\n---\n\n10. Use best practices for NestJS + Mongoose production backend.\n\nReturn full working code for all files.",
+      "timestamp": "2026-02-14T13:14:42.030Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-02-14T13:14:45.370Z",
+  "updatedAt": "2026-02-14T13:21:56.502Z",
+  "justFinishedAt": "2026-02-14T13:21:56.502Z",
+  "prUrl": "https://github.com/PhamDucHau/be-core-web-cms/pull/1"
+}
