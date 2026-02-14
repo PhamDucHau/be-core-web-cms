@@ -10,6 +10,7 @@ import { FriendModule } from './auth/socket/friend.module';
 import { MinioModule } from './minio/minio.module';
 import { UserModule } from './user/user.module';
 import { ProductModule } from './product/product.module';
+import { CategoryModule } from './modules/category/category.module';
 
 @Module({
   imports: [
@@ -33,7 +34,8 @@ import { ProductModule } from './product/product.module';
     AuthModule,
     MinioModule,
     UserModule,
-    ProductModule,   
+    ProductModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
